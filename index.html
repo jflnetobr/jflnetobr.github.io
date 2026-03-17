@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0070c0">
+    <meta
+      name="description"
+      content="Calculadora de juros e multa da Info Matos com compartilhamento por imagem e suporte para instalação no celular."
+    >
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./assets/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Calculadora de Juros | Info Matos</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero__brand">
+          <div class="hero__brand-strip">
+            <img
+              class="hero__logo"
+              src="./assets/logo.png"
+              alt="Logomarca Info Matos"
+              width="421"
+              height="353"
+            >
+          </div>
+        </div>
+
+        <div class="hero__content">
+          <div>
+            <p class="eyebrow">INFOMATOS</p>
+            <h1>Calculadora de Juros</h1>
+          </div>
+
+          <div class="hero__formula">
+            <span>Multa fixa</span>
+            <strong>2%</strong>
+            <span>Juros diário</span>
+            <strong>0,333%</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel panel--input" aria-labelledby="titulo-formulario">
+          <div class="panel__header">
+            <div>
+              <p class="panel__eyebrow">Entradas</p>
+              <h2 id="titulo-formulario">Informe os dados</h2>
+            </div>
+          </div>
+
+          <form class="form-grid" id="calculatorForm" novalidate>
+            <label class="field">
+              <span class="field__label">Valor da mensalidade</span>
+              <div class="field__input-wrap field__input-wrap--currency">
+                <span class="field__prefix">R$</span>
+                <input
+                  id="mensalidade"
+                  name="mensalidade"
+                  type="number"
+                  inputmode="decimal"
+                  min="0"
+                  step="0.01"
+                  placeholder="65,00"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Vencimento</span>
+              <input id="vencimento" name="vencimento" type="date" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Data de pagamento</span>
+              <div class="field__input-row">
+                <input id="pagamento" name="pagamento" type="date">
+                <button class="field__action" type="button" id="btnHoje">Hoje</button>
+              </div>
+              <small class="field__hint">Digite uma data ou clique no botão "Hoje" para utilizar a data atual.</small>
+            </label>
+          </form>
+
+          <div class="panel__footer">
+            <button class="secondary-button" type="button" id="btnLimpar">
+              Limpar
+            </button>
+
+            <div class="actions">
+              <button class="primary-button" type="button" id="btnShare" disabled>
+                Compartilhar imagem
+              </button>
+              <button class="ghost-button" type="button" id="btnInstall" hidden>
+                Adicionar à tela inicial
+              </button>
+            </div>
+          </div>
+
+          <p class="install-hint" id="installHint" hidden></p>
+        </section>
+
+        <section class="panel panel--result" aria-labelledby="titulo-resultado">
+          <div class="panel__header panel__header--compact">
+            <div>
+              <p class="panel__eyebrow">Resultado</p>
+              <h2 id="titulo-resultado">Resumo do cálculo</h2>
+            </div>
+            <span class="status-pill" id="statusPill" data-state="alert">Alerta: preencha os campos</span>
+          </div>
+
+          <div class="total-card">
+            <span class="total-card__label">Valor devido</span>
+            <strong class="total-card__value" id="valorDevido">R$ 0,00</strong>
+            <p class="total-card__meta" id="resumoDatas">
+              Informe valor e vencimento para calcular.
+            </p>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-card">
+              <span class="result-card__label">Dias de atraso</span>
+              <strong class="result-card__value" id="diasAtraso">0</strong>
+            </article>
+
+            <article class="result-card">
+              <span class="result-card__label">Multa</span>
+              <strong class="result-card__value" id="multa">R$ 0,00</strong>
+            </article>
+
+            <article class="result-card">
+              <span class="result-card__label">Juros</span>
+              <strong class="result-card__value" id="juros">R$ 0,00</strong>
+            </article>
+
+            <article class="result-card">
+              <span class="result-card__label">Mensalidade base</span>
+              <strong class="result-card__value" id="valorBase">R$ 0,00</strong>
+            </article>
+          </div>
+
+          <div class="timeline-card">
+            <div>
+              <span class="timeline-card__label">Data considerada para pagamento</span>
+              <strong id="dataConsiderada">-</strong>
+            </div>
+            <div>
+              <span class="timeline-card__label">Situação</span>
+              <strong id="situacaoPagamento">Aguardando dados</strong>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
